@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <title>Linked Lists</title>
+    <style>
+    </style>
+<body>
+
+<h1>Data structures in Javascript</h1>
+<h2>Linked list using Javascript</h2>
+<p id="demo">Open console to see the result</p>
+
+<script>
+const createList = function () {
+    let head = null, length = 0;
+    const node = (element) => {
+        return {
+            element,
+            next: null
+        };
+    }
+    this.add = (element) => {
+        if(head === null) {
+            console.log('Element added: ', element);
+            head = node(element);
+        } else {
+            let currentNode = head;
+            // Move cuurent node to next until it finds next value as null
+            while(currentNode.next !== null) {
+                currentNode = currentNode.next;
+            }
+            console.log('Element added: ', element);
+            currentNode.next = node(element);
+        }
+        length++;
+    }
+    this.remove = (listItem) => {
+        let current = head;
+        if (head === null) {
+            return "List is empty";
+        }
+        if (head.element === listItem) {
+            console.log('Element removed: ', listItem)
+            head = head.next;
+            length--;
+            return head;
+        } else {
+            while (current.next !== null) {
+                if (current.next.element === listItem) {
+                    console.log('Element removed: ', listItem)
+                    current.next = current.next.next;
+                    length--;
+                    return head;
+                }
+                current = current.next;
+            }
+        }
+    }
+    this.print = () => {
+        let current = head;
+        const list = [];
+        while (current !== null) {
+            list.push(current.element);
+            current = current.next;
+        };
+        console.log('Linked list Obj: ', head);
+        console.log('Final list: ', list.join('->'), "Length: ", length);
+    }
+}
+const newList = new createList();
+newList.add(5);
+newList.add(3);
+newList.add(2);
+newList.add(1);
+newList.add(2);
+newList.remove(2);
+newList.print();
+</script>
+</body>
+</html>
